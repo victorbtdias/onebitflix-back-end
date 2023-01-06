@@ -4,7 +4,7 @@ import { UserCreationAttributes } from "../models/User";
 export const userService = {
   findByEmail: async (email: string) => {
     const user = await User.findOne({
-      where: { email: email },
+      where: { email },
     });
     return user;
   },
