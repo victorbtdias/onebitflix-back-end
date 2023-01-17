@@ -112,7 +112,6 @@ export const userService = {
     const keepWatchingList = filterLastEpisodesByCourse(
       userWithWatchingEpisodes.Episodes!
     );
-
     // @ts-ignore
     keepWatchingList.sort((a, b) =>
       a.watchTime.updatedAt < b.watchTime.updatedAt ? 1 : -1
