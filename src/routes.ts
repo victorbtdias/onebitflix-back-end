@@ -48,5 +48,6 @@ router.put(
   ensureAuth,
   usersController.updatePassword
 );
+router.get("/users/current/watching", ensureAuth, usersController.watching);
 
 export { router };
