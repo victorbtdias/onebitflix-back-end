@@ -1,5 +1,6 @@
 import { Category } from "./Category";
 import { Course } from "./Course";
+import { Document } from "./Document";
 import { Episode } from "./Episode";
 import { Favorite } from "./Favorite";
 import { Like } from "./Like";
@@ -24,5 +25,8 @@ User.belongsToMany(Course, { through: Favorite });
 User.belongsToMany(Course, { through: Like });
 User.belongsToMany(Episode, { through: WatchTime });
 User.hasMany(Favorite, { as: "FavoriteCourses", foreignKey: "user_id" });
+User.hasMany(Document, { as: "UserDocuments", foreignKey: "user_id" });
 
-export { Category, Course, Episode, Favorite, Like, User, WatchTime };
+Document.belongsTo(User);
+
+export { Category, Course, Document, Episode, Favorite, Like, User, WatchTime };
