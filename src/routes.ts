@@ -2,16 +2,11 @@ import express from "express";
 import { authController } from "./controllers/authController";
 import { categoriesController } from "./controllers/categoriesController";
 import { coursesController } from "./controllers/coursesController";
-import { documentController } from "./controllers/documentController";
 import { episodesController } from "./controllers/episodesController";
 import { favoritesController } from "./controllers/favoritesController";
 import { likesController } from "./controllers/likesController";
-import { s3Controller } from "./controllers/s3Controller";
 import { usersController } from "./controllers/usersController";
 import { ensureAuth, ensureAuthViaQuery } from "./middlewares/auth";
-const multer = require("multer");
-
-const upload = multer({ dest: "uploads/" });
 
 const router = express.Router();
 
@@ -54,18 +49,5 @@ router.put(
   usersController.updatePassword
 );
 router.get("/users/current/watching", ensureAuth, usersController.watching);
-
-router.post(
-  "/images",
-  ensureAuth,
-  upload.single("image"),
-  s3Controller.createAndUpload
-);
-
-router.get("/images/:key", ensureAuth, s3Controller.getImageByKey);
-
-router.delete("/images/remove/:id", ensureAuth, s3Controller.remove);
-
-router.get("/documents", ensureAuth, documentController.show);
 
 export { router };
